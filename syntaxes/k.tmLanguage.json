@@ -1,0 +1,276 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "k",
+  "scopeName": "source.k",
+  "patterns": [
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#system"
+    },
+    {
+      "include": "#cast"
+    },
+    {
+      "include": "#attribute"
+    },
+    {
+      "include": "#symbol"
+    },
+    {
+      "include": "#dsl"
+    },
+    {
+      "include": "#control"
+    },
+    {
+      "include": "#assign"
+    },
+    {
+      "include": "#conditional"
+    },
+    {
+      "include": "#primitives"
+    },
+    {
+      "include": "#variable"
+    },
+    {
+      "include": "#constant"
+    },
+    {
+      "include": "#comment"
+    }
+  ],
+  "repository": {
+    "string": {
+      "patterns": [
+        {
+          "name": "support.type.cast.k",
+          "match": "\"[[:alpha:]]\"\\$"
+        },
+        {
+          "name": "string.quoted.double.k",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.k",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "system": {
+      "patterns": [
+        {
+          "name": "keyword.system.k",
+          "match": "^\\\\([12abBcCdefglopPrsStTuvwWxz_]|cd|ts)\\b"
+        },
+        {
+          "name": "keyword.system.k",
+          "match": "^\\\\\\w.*$"
+        }
+      ]
+    },
+    "cast": {
+      "patterns": [
+        {
+          "name": "support.type.cast.k",
+          "match": "`(year|week|mm|dd|hh|ss|uu)\\$"
+        },
+        {
+          "name": "support.type.cast.k",
+          "match": "`(boolean|guid|byte|short|int|long|real|float|char|symbol|timestamp|month|date|datetime|timespan|time|minute|second)\\$"
+        }
+      ]
+    },
+    "attribute": {
+      "patterns": [
+        {
+          "name": "support.type.attribute.k",
+          "match": "`[gpsu]#"
+        }
+      ]
+    },
+    "symbol": {
+      "patterns": [
+        {
+          "name": "entity.name.type.symbol.handle.k",
+          "match": "`::?([a-zA-Z0-9\\./]+:?)+"
+        },
+        {
+          "name": "entity.name.type.symbol.k",
+          "match": "`[a-zA-Z0-9\\.]*(:[a-zA-Z0-9\\.:/]*|[a-zA-Z0-9\\.]*)"
+        }
+      ]
+    },
+    "dsl": {
+      "patterns": [
+        {
+          "name": "q.k",
+          "match": "^q\\)"
+        },
+        {
+          "name": "s.k",
+          "match": "^s\\)"
+        }
+      ]
+    },
+    "control": {
+      "patterns": [
+        {
+          "name": "keyword.control.k",
+          "match": "\\b(do|while)\\b"
+        }
+      ]
+    },
+    "assign": {
+      "patterns": [
+        {
+          "name": "support.function.k",
+          "match": "::"
+        }
+      ]
+    },
+    "conditional": {
+      "patterns": [
+        {
+          "name": "keyword.control.k",
+          "match": "[$?'.@](?=\\[)"
+        },
+        {
+          "name": "keyword.control.k",
+          "match": "\\bif\\b"
+        }
+      ]
+    },
+    "primitives": {
+      "patterns": [
+        {
+          "name": "variable.language.k",
+          "match": "\\.z\\.(D|K|N|P|T|W|X|Z|a|ac|b|bm|c|d|e|ex|exit|ey|f|h|i|k|l|n|o|p|pc|pd|pg|ph|pi|pm|po|pp|pq|ps|pw|q|s|t|ts|u|vs|w|wc|wo|ws|x|z|zd)\\b"
+        },
+        {
+          "name": "variable.language.k",
+          "match": "\\.q\\.(aj|aj0|ajf|ajf0|all|and|any|asc|asof|attr|avgs|ceiling|cols|count|cross|csv|cut|deltas|desc|differ|distinct|dsave|each|ej|ema|eval|except|fby|fills|first|fkeys|flip|floor|get|group|gtime|hclose|hcount|hdel|hsym|iasc|idesc|ij|ijf|inter|inv|key|keys|lj|ljf|load|lower|lsq|ltime|ltrim|mavg|maxs|mcount|md5|mdev|med|meta|mins|mmax|mmin|mmu|mod|msum|neg|next|not|null|or|over|parse|peach|pj|prds|prev|prior|rand|rank|ratios|raze|read0|read1|reciprocal|reval|reverse|rload|rotate|rsave|rtrim|save|scan|scov|sdev|set|show|signum|ssr|string|sublist|sums|sv|svar|system|tables|til|trim|type|uj|ujf|ungroup|union|upper|upsert|value|view|views|vs|where|wj|wj1|ww|xasc|xbar|xcol|xcols|xdesc|xgroup|xkey|xlog|xprev|xrank)\\b"
+        },
+        {
+          "name": "variable.language.k",
+          "match": "\\.o\\.(B0|C0|Cols|Columns|FG|Fkey|Gkey|Key|PS|Special|Stats|T|T0|TI|Tables|Ts|TypeInfo|ex|o|t)\\b"
+        },
+        {
+          "name": "variable.language.k",
+          "match": "\\.j\\.(J|e|es|j|jd|k|q|s)\\b"
+        },
+        {
+          "name": "variable.language.k",
+          "match": "\\.h\\.(HOME|br|c0|c1|cd|code|d|data|eb|ec|ed|edsn|es|ex|fram|ha|hb|hc|he|hn|hnz|hp|hr|ht|hta|htac|htc|html|http|hu|hug|hy|iso8601|jx|logo|nbr|pre|sa|sb|sc|td|text|tx|ty|uh|val|xd|xmp|xs|xt)\\b"
+        },
+        {
+          "name": "variable.language.k",
+          "match": "\\.Q\\.(A|Aa|BP|Cf|DL|IN|K|L|Ll|Lp|Ls|Lu|Lx|M|MAP|S|V|Xf|a|a0|a1|a2|addmonths|addr|ajf0|an|b6|bc|bd|bp|bs|bt|btoa|btx|bu|bv|chk|cn|d0|dbg|dd|def|dpft|dpfts|dpt|dpts|dr|dsftg|dt|dw|en|ens|enx|enxs|err|f|fc|ff|fk|fl|fmt|foo|fp|fpn|fps|fqk|fql|fs|fsn|ft|fu|gc|gz|hap|hdpf|hg|hmb|host|hp|id|ind|j10|j12|jl8|k|l|ld|lu|n|nA|nct|nv|opt|ord|p|p1|p2|par|pcnt|pl|pl0|pm|prf0|prr|ps|pt|q0|qa|qb|qd|qe|qp|qt|res|s|s1|s2|sbt|sha1|srr|sw|t|t0|tab|trp|ts|tt|tx|ty|ua|unm|v|view|vt|w|x0|x1|x10|x12|x2|xy)\\b"
+        },
+        {
+          "name": "keyword.k",
+          "match": "\\b(abs|acos|asin|atan|avg|bin|binr|cor|cos|cov|dev|div|enlist|exit|exp|getenv|hopen|in|insert|last|like|log|max|min|prd|setenv|sin|sqrt|ss|sum|tan|var|wavg|within|wsum|xexp)\\b"
+        },
+        {
+          "name": "keyword.sql.k",
+          "match": "\\b(delete|exec|select|update)\\b"
+        }
+      ]
+    },
+    "variable": {
+      "patterns": [
+        {
+          "name": "variable.k",
+          "match": "(?<![a-zA-Z\\d])\\.?[a-zA-Z][a-zA-Z\\d]*(\\.[a-zA-Z\\d]+)*"
+        }
+      ]
+    },
+    "constant": {
+      "patterns": [
+        {
+          "comment": "guid",
+          "name": "constant.numeric.k",
+          "match": "\\b0[nN]g\\b"
+        },
+        {
+          "comment": "null/infinity",
+          "name": "constant.numeric.k",
+          "match": "(-?0[wW]|0[nN])[hijefcpmdznuvt]?\\b"
+        },
+        {
+          "comment": "boolean",
+          "name": "constant.numeric.k",
+          "match": "[01]+b"
+        },
+        {
+          "comment": "io",
+          "name": "constant.language.k",
+          "match": "\\b[012]:"
+        },
+        {
+          "comment": "byte",
+          "name": "constant.numeric.k",
+          "match": "0x[[:xdigit:]]*"
+        },
+        {
+          "comment": "time",
+          "name": "constant.numeric.k",
+          "match": "\\d{2}:[0-5]\\d(:[0-5]\\d(\\.\\d+)?)?"
+        },
+        {
+          "comment": "date",
+          "name": "constant.numeric.k",
+          "match": "\\d{4}\\.[01]\\d(\\.[01]\\d|m)"
+        },
+        {
+          "comment": "timestamp",
+          "name": "constant.numeric.k",
+          "match": "(\\d{4}\\.[01]\\d\\.[0-3]\\d[DT]|\\d+D)([012]\\d:[0-5]\\d:[0-5]\\d(\\.\\d+)?)?"
+        },
+        {
+          "comment": "number",
+          "name": "constant.numeric.k",
+          "match": "-?\\d+(e[+-]?\\d+)?[hijefcnuvt]?"
+        },
+        {
+          "comment": "number",
+          "name": "constant.numeric.k",
+          "match": "-?(\\d+)?\\.\\d*(e[+-]?\\d+)?[ef]?"
+        }
+      ]
+    },
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.k",
+          "match": "^/\\s*\\S.*$"
+        },
+        {
+          "name": "comment.line.k",
+          "match": "\\s/.*$"
+        },
+        {
+          "name": "comment.block.k",
+          "begin": "^/\\s*$",
+          "end": "^\\\\\\s*$"
+        },
+        {
+          "name": "comment.block.trailing.k",
+          "begin": "^\\\\\\s*$",
+          "end": "\\z"
+        },
+        {
+          "name": "comment.block.start.k",
+          "begin": "\\A\\s",
+          "while": "^\\s"
+        }
+      ]
+    }
+  }
+}

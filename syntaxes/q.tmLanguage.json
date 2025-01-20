@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "q",
+  "scopeName": "source.q",
+  "patterns": [
+    {
+      "include": "source.k"
+    },
+    {
+      "include": "#dsl"
+    },
+    {
+      "include": "#primitives"
+    },
+    {
+      "include": "#symbol"
+    },
+    {
+      "include": "#variable"
+    }
+  ],
+  "repository": {
+    "dsl": {
+      "patterns": [
+        {
+          "name": "k.q",
+          "match": "^k\\)"
+        }
+      ]
+    },
+    "primitives": {
+      "patterns": [
+        {
+          "name": "keyword.q",
+          "match": "\\b(aj|aj0|ajf|ajf0|all|and|any|asc|asof|attr|avgs|ceiling|cols|count|cross|csv|cut|deltas|desc|differ|distinct|dsave|each|ej|ema|eval|except|fby|fills|first|fkeys|flip|floor|get|group|gtime|hclose|hcount|hdel|hsym|iasc|idesc|ij|ijf|inter|inv|key|keys|lj|ljf|load|lower|lsq|ltime|ltrim|mavg|maxs|mcount|md5|mdev|med|meta|mins|mmax|mmin|mmu|mod|msum|neg|next|not|null|or|over|parse|peach|pj|prds|prev|prior|rand|rank|ratios|raze|read0|read1|reciprocal|reval|reverse|rload|rotate|rsave|rtrim|save|scan|scov|sdev|set|show|signum|ssr|string|sublist|sums|sv|svar|system|tables|til|trim|type|uj|ujf|ungroup|union|upper|upsert|value|view|views|vs|where|wj|wj1|ww|xasc|xbar|xcol|xcols|xdesc|xgroup|xkey|xlog|xprev|xrank)\\b"
+        }
+      ]
+    },
+    "symbol": {
+      "patterns": [
+        {
+          "name": "entity.name.type.symbol.handle.q",
+          "match": "`::?([a-zA-Z0-9\\./_]+:?)+"
+        },
+        {
+          "name": "entity.name.type.symbol.q",
+          "match": "`[a-zA-Z0-9\\.]*(:[a-zA-Z0-9\\.:/_]*|[a-zA-Z0-9\\._]*)"
+        }
+      ]
+    },
+    "variable": {
+      "patterns": [
+        {
+          "name": "variable.q",
+          "match": "(?<![a-zA-Z\\d])\\.?[a-zA-Z][a-zA-Z\\d_]*(\\.[a-zA-Z\\d_]+)*"
+        }
+      ]
+    }
+  }
+}

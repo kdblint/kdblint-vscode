@@ -1,0 +1,11 @@
+{
+  "comments": {
+    "blockComment": ["\n/\n", "\n\\\n"],
+    "lineComment": "/"
+  },
+  "brackets": [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"]
+  ]
+}

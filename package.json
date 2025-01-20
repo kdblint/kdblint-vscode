@@ -1,0 +1,121 @@
+{
+  "name": "kdblint-vscode",
+  "version": "0.1.0",
+  "publisher": "kdbLint",
+  "engines": {
+    "vscode": "^1.22.0"
+  },
+  "license": "MIT",
+  "displayName": "kdbLint",
+  "description": "kdbLint extension for Visual Studio Code",
+  "categories": [
+    "Formatters",
+    "Linters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "q",
+    "k",
+    "kdb",
+    "kdb+"
+  ],
+  "preview": true,
+  "main": "./dist/extension",
+  "contributes": {
+    "grammars": [
+      {
+        "language": "k",
+        "scopeName": "source.k",
+        "path": "./syntaxes/k.tmLanguage.json"
+      },
+      {
+        "language": "q",
+        "scopeName": "source.q",
+        "path": "./syntaxes/q.tmLanguage.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "k",
+        "extensions": [
+          ".k"
+        ],
+        "firstLine": "^#!.*\\bk\\b",
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "q",
+        "extensions": [
+          ".q"
+        ],
+        "aliases": [
+          "kdb",
+          "kdb+"
+        ],
+        "firstLine": "^#!.*\\bq\\b",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "KdbLint",
+      "properties": {
+        "kdblint.kdbVersion": {
+          "type": "string",
+          "default": "4.0",
+          "enum": [
+            "4.0"
+          ]
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "workspaceContains:**/*.{k,q}"
+  ],
+  "dependencies": {
+    "@kdblint/kdblint": "^0.1.0-dev.302",
+    "camelcase": "^8.0.0",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "esbuild": "^0.21.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run build -- --minify",
+    "build": "esbuild --bundle --external:vscode src/extension.ts --outdir=dist --platform=node --format=cjs",
+    "compile": "npm run build -- --sourcemap",
+    "watch": "npm run build -- --sourcemap --watch",
+    "lint": "eslint ./src --ext .ts",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdblint/kdblint-vscode.git"
+  },
+  "author": {
+    "name": "David Strachan",
+    "email": "david@kdblint.com"
+  },
+  "bugs": {
+    "url": "https://github.com/kdblint/kdblint-vscode/issues"
+  },
+  "homepage": "https://github.com/kdblint/kdblint-vscode#readme",
+  "lint-staged": {
+    "**/*": "npx prettier --write --ignore-unknown"
+  }
+}
