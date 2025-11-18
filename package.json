@@ -80,17 +80,17 @@
     "vscode-languageserver": "^9.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@types/vscode": "^1.85.0",
-    "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "@typescript-eslint/parser": "^6.19.1",
-    "esbuild": "^0.25.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "prettier": "^3.2.4",
-    "typescript": "^5.3.3"
+    "@types/node": "^24.10.0",
+    "@types/vscode": "^1.105.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "esbuild": "^0.25.12",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
   },
   "extensionKind": [
     "workspace"
@@ -101,7 +101,7 @@
     "compile": "npm run build -- --sourcemap",
     "watch": "npm run build -- --sourcemap --watch",
     "lint": "eslint ./src --ext .ts",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -116,6 +116,6 @@
   },
   "homepage": "https://github.com/kdblint/kdblint-vscode#readme",
   "lint-staged": {
-    "**/*": "npx prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
