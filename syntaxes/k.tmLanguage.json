@@ -111,11 +111,7 @@
       "patterns": [
         {
           "name": "q.k",
-          "match": "^q\\)"
-        },
-        {
-          "name": "s.k",
-          "match": "^s\\)"
+          "match": "^[a-zA-Z]\\)"
         }
       ]
     },

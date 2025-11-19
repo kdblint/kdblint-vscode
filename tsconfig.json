@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ESNext",
-    "lib": ["ESNext"],
+    "module": "nodenext",
+    "target": "esnext",
+    "lib": ["WebWorker"],
     "outDir": "dist",
     "sourceMap": true,
     "strictNullChecks": true

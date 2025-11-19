@@ -1,61 +1,48 @@
-import camelCase from "camelcase";
+import { createStdioOptions, startServer } from "@vscode/wasm-wasi-lsp";
+import { ProcessOptions, Wasm } from "@vscode/wasm-wasi/v1";
 import * as fs from "fs";
 import * as path from "path";
-import { ExtensionContext, commands, window, workspace } from "vscode";
-
+import { ExtensionContext, Uri, commands, window, workspace } from "vscode";
 import {
-  CancellationToken,
-  ConfigurationParams,
-  LSPAny,
   LanguageClient,
   LanguageClientOptions,
-  RequestHandler,
-  ResponseError,
-  ServerOptions,
 } from "vscode-languageclient/node";
 
 let client: LanguageClient;
 
 const debug = process.env.VSCODE_DEBUG_MODE !== undefined;
 
-const platform =
-  process.platform === "win32"
-    ? "windows"
-    : process.platform === "darwin"
-      ? "macos"
-      : process.platform === "linux"
-        ? "linux"
-        : undefined;
-
-const arch =
-  process.arch === "x64"
-    ? "x86_64"
-    : process.arch === "arm64"
-      ? "aarch64"
-      : undefined;
-
 export async function activate(context: ExtensionContext) {
-  if (!platform) {
-    await window.showErrorMessage(
-      `Unsupported operating system platform: ${process.platform}.`,
-    );
-    return;
-  }
-
-  if (!arch) {
-    await window.showErrorMessage(
-      `Unsupported CPU architecture: ${process.arch}.`,
-    );
-    return;
-  }
-
   const serverCommand = context.asAbsolutePath(getBin("kdblint"));
-  const serverOptions: ServerOptions = {
-    run: { command: serverCommand, args: ["lsp"] },
-    debug: { command: serverCommand, args: ["lsp"] },
-  };
 
   const outputChannel = window.createOutputChannel("kdblint Language Server");
+  const wasm = await Wasm.load();
+  const serverOptions = debug
+    ? { command: serverCommand, args: ["lsp"] }
+    : async () => {
+        const options: ProcessOptions = {
+          stdio: createStdioOptions(),
+          mountPoints: [{ kind: "workspaceFolder" }],
+          args: ["lsp"],
+        };
+        const bytes = await workspace.fs.readFile(Uri.parse(serverCommand));
+        const module = await WebAssembly.compile(
+          bytes as Uint8Array<ArrayBuffer>,
+        );
+        const process = await wasm.createProcess(
+          "kdblint",
+          module,
+          { initial: 160, maximum: 160, shared: true },
+          options,
+        );
+
+        const decoder = new TextDecoder("utf-8");
+        process.stderr!.onData((data) => {
+          outputChannel.append(decoder.decode(data));
+        });
+
+        return startServer(process);
+      };
 
   const clientOptions: LanguageClientOptions = {
     documentSelector: [
@@ -63,11 +50,6 @@ export async function activate(context: ExtensionContext) {
       { scheme: "file", language: "q" },
     ],
     outputChannel,
-    middleware: {
-      workspace: {
-        configuration: configurationMiddleware,
-      },
-    },
   };
 
   client = new LanguageClient(
@@ -99,6 +81,7 @@ export async function deactivate() {
   }
 
   await client.stop();
+  await client.dispose();
 }
 
 function getBin(bin: string): string {
@@ -106,42 +89,8 @@ function getBin(bin: string): string {
     "node_modules",
     "@kdblint",
     "kdblint",
-    "dist",
-    platform!,
-    arch!,
-    bin + (platform === "windows" ? ".exe" : ""),
+    "zig-out",
+    "bin",
+    bin + (debug ? (process.platform === "win32" ? ".exe" : "") : ".wasm"),
   );
-}
-
-async function configurationMiddleware(
-  params: ConfigurationParams,
-  token: CancellationToken,
-  next: RequestHandler<ConfigurationParams, LSPAny[], void>,
-): Promise<LSPAny[] | ResponseError> {
-  const optionIndices: Record<string, number | undefined> = {};
-
-  params.items.forEach((param, index) => {
-    if (param.section) {
-      param.section = `kdblint.${camelCase(param.section.slice("kdblint.".length))}`;
-      optionIndices[param.section] = index;
-    }
-  });
-
-  const result = await next(params, token);
-  if (result instanceof ResponseError) {
-    return result;
-  }
-
-  const configuration = workspace.getConfiguration("kdblint");
-
-  for (const name in optionIndices) {
-    const index = optionIndices[name]!;
-    const section = name.slice("kdblint.".length);
-    const configValue = configuration.get(section);
-    if (typeof configValue === "string" && configValue) {
-      result[index] = configValue;
-    }
-  }
-
-  return result as unknown[];
 }

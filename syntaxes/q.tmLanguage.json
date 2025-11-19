@@ -7,9 +7,6 @@
       "include": "source.k"
     },
     {
-      "include": "#dsl"
-    },
-    {
       "include": "#primitives"
     },
     {
@@ -20,14 +17,6 @@
     }
   ],
   "repository": {
-    "dsl": {
-      "patterns": [
-        {
-          "name": "k.q",
-          "match": "^k\\)"
-        }
-      ]
-    },
     "primitives": {
       "patterns": [
         {

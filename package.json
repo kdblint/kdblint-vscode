@@ -1,13 +1,13 @@
 {
   "name": "kdblint-vscode",
   "version": "0.1.0",
-  "publisher": "kdbLint",
+  "publisher": "kdblint",
   "engines": {
     "vscode": "^1.22.0"
   },
   "license": "MIT",
-  "displayName": "kdbLint",
-  "description": "kdbLint extension for Visual Studio Code",
+  "displayName": "kdblint",
+  "description": "kdblint extension for Visual Studio Code",
   "categories": [
     "Formatters",
     "Linters",
@@ -58,7 +58,7 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "KdbLint",
+      "title": "kdblint",
       "properties": {
         "kdblint.kdbVersion": {
           "type": "string",
@@ -73,11 +73,13 @@
   "activationEvents": [
     "workspaceContains:**/*.{k,q}"
   ],
+  "extensionDependencies": [
+    "ms-vscode.wasm-wasi-core"
+  ],
   "dependencies": {
-    "@kdblint/kdblint": "^0.1.0-dev.302",
-    "camelcase": "^8.0.0",
-    "vscode-languageclient": "^9.0.1",
-    "vscode-languageserver": "^9.0.1"
+    "@kdblint/kdblint": "^0.1.0-dev.398",
+    "@vscode/wasm-wasi-lsp": "^0.1.0-pre.8",
+    "camelcase": "^8.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
