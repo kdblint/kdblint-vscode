@@ -1,5 +1,6 @@
 **
 !dist/extension.js
+!node_modules/@kdblint/kdblint/zig-out/bin/kdblint.wasm
 !syntaxes/k.tmLanguage.json
 !syntaxes/q.tmLanguage.json
 !language-configuration.json
