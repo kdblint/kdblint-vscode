@@ -1,9 +1,9 @@
 {
   "name": "kdblint-vscode",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "publisher": "kdblint",
   "engines": {
-    "vscode": "^1.22.0"
+    "vscode": "^1.105.0"
   },
   "license": "MIT",
   "displayName": "kdblint",
@@ -99,7 +99,7 @@
   ],
   "scripts": {
     "vscode:prepublish": "npm run build -- --minify",
-    "build": "esbuild --bundle --external:vscode src/extension.ts --outdir=dist --platform=node --format=cjs",
+    "build": "esbuild --bundle --external:vscode src/extension.ts --outdir=dist --platform=node --target=node20 --format=cjs",
     "compile": "npm run build -- --sourcemap",
     "watch": "npm run build -- --sourcemap --watch",
     "lint": "eslint ./src --ext .ts",
