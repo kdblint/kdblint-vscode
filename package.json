@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "publisher": "kdblint",
   "engines": {
-    "vscode": "^1.105.0"
+    "vscode": "^1.78.2"
   },
   "license": "MIT",
   "displayName": "kdblint",
@@ -83,7 +83,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
-    "@types/vscode": "^1.105.0",
+    "@types/vscode": "^1.78.2",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
     "esbuild": "^0.25.12",
