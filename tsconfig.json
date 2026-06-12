@@ -3,6 +3,7 @@
     "module": "nodenext",
     "target": "esnext",
     "lib": ["WebWorker"],
+    "rootDir": "./src",
     "outDir": "dist",
     "sourceMap": true,
     "strictNullChecks": true
