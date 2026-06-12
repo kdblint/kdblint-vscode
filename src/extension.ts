@@ -1,4 +1,8 @@
-import { createStdioOptions, startServer } from "@vscode/wasm-wasi-lsp";
+import {
+  createStdioOptions,
+  createUriConverters,
+  startServer,
+} from "@vscode/wasm-wasi-lsp";
 import { ProcessOptions, Wasm } from "@vscode/wasm-wasi/v1";
 import * as fs from "fs";
 import * as path from "path";
@@ -52,6 +56,7 @@ export async function activate(context: ExtensionContext) {
       { scheme: "file", language: "q" },
     ],
     outputChannel,
+    uriConverters: debug && !useWasm ? undefined : createUriConverters(),
   };
 
   client = new LanguageClient(
