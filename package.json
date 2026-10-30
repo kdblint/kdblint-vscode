@@ -123,5 +123,8 @@
   "homepage": "https://github.com/kdblint/kdblint-vscode#readme",
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.1.3"
   }
 }
