@@ -6,7 +6,8 @@
     "rootDir": "./src",
     "outDir": "dist",
     "sourceMap": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "types": ["node"]
   },
   "include": ["./src/**/*"]
 }

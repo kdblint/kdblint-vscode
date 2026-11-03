@@ -35,7 +35,9 @@ function getArch(): [OS, Arch] {
 export async function activate(context: ExtensionContext) {
   const serverCommand = context.asAbsolutePath(getBin("kdblint"));
 
-  const outputChannel = window.createOutputChannel("kdblint Language Server");
+  const outputChannel = window.createOutputChannel("kdblint Language Server", {
+    log: true,
+  });
   const wasm = await Wasm.load();
   const serverOptions = !useWasm
     ? { command: serverCommand, args: ["lsp"] }

@@ -82,7 +82,7 @@
     "camelcase": "^8.0.0"
   },
   "devDependencies": {
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.19.2",
     "@types/vscode": "^1.78.2",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
