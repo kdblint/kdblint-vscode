@@ -1,6 +1,6 @@
 {
   "name": "kdblint-vscode",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "publisher": "kdblint",
   "engines": {
     "vscode": "^1.78.2"
