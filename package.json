@@ -56,6 +56,14 @@
         "configuration": "./language-configuration.json"
       }
     ],
+    "configurationDefaults": {
+      "[q]": {
+        "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",<>/?"
+      },
+      "[k]": {
+        "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",<>/?"
+      }
+    },
     "configuration": {
       "type": "object",
       "title": "kdblint",
@@ -77,7 +85,7 @@
     "ms-vscode.wasm-wasi-core"
   ],
   "dependencies": {
-    "@kdblint/kdblint": "^0.1.0-dev.462",
+    "@kdblint/kdblint": "^0.1.0-dev.467",
     "@vscode/wasm-wasi-lsp": "^0.1.0-pre.8",
     "camelcase": "^8.0.0"
   },
